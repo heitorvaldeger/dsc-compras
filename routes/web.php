@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::post('/autenticar', 'AutenticarController@AutenticarAction');
+
+Route::group(['middleware' => ['tokenvalidate']], function(){
+    Route::view('/', 'login.login')->name('login');
 });
+Route::get('/index', function(){
+    return view('componentes.index');
+})->middleware('hastoken')->name('index');
+
+Route::get('/logout', 'AutenticarController@LogoutAction')->name('logout');
