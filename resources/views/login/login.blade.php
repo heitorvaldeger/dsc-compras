@@ -1,12 +1,13 @@
 @extends('login.principal')
 @section('conteudo')
-    @if(isset($authfailure)) 
+    @if(session('authfailure')) 
     <div class="alert alert-danger">
         <p>
-            {{$authfailure}} 
+            {{session('authfailure')}} 
         </p>
     </div>
     @endif
+
     <form action="{{action('AutenticarController@AutenticarAction')}}" method="post">
     {{csrf_field()}}
         <label for="login">Login:</label><br/>

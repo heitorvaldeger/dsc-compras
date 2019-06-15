@@ -36,28 +36,40 @@ class AutenticarController extends Controller
         {
             $dados = json_decode($response->getBody());
 
+            if($dados->usuario->tipo_acesso[0] != "1")
+                return redirect('/')->with('authfailure', 'Você não tem permissão para acessar esse módulo');
+
             //Escrever o token na sessão
-            $request->session()->put('token', $dados->token);
+            $request->session()->put('dados', $dados);
             
             $log = new LogController();
             $log_result = $log->CriarLog($dados->token);
+
             if($log_result['status_code'] == 200 || $log_result['status_code'] == 400)
-            {
                 return redirect('index')->with('msg', $log_result['msg']);
-            }
         }
 
-        if($status_code == 401)
+        if($status_code != 200)
         {
-            return view('login.login', ['authfailure' => 'Usuário ou senha incorretos']);
+            return redirect('/')->with('authfailure', 'Usuário ou senha incorretos');
+            //return view('login.login', ['authfailure' => 'Usuário ou senha incorretos']);
         }
     }
 
     public function LogoutAction(Request $request)
     {
-        $request->session()->forget('token');
+        $request->session()->forget('dados');
 
         return redirect('/');
+    }
+
+    private static function ChecarTipoAcesso($tipoAcesso)
+    {
+        if($tipoAcesso[0] == "1")
+        {
+            return true;
+        }
+        return false;
     }
 
     public function ValidarToken($token)

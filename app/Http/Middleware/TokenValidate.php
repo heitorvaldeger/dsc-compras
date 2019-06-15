@@ -16,9 +16,10 @@ class TokenValidate
      */
     public function handle($request, Closure $next)
     {
-        if($request->session()->has('token'))
+        if($request->session()->has('dados'))
         {
-            $token = $request->session()->get('token');
+            $dados = $request->session()->get('dados');
+            $token = $dados->token;
             $validartoken = new AutenticarController;
             $retorno = $validartoken->ValidarToken($token);
 

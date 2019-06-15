@@ -1,9 +1,11 @@
 @extends('template.template')
 
 @section('conteudo')
-    <div class="alert alert-success">
-        <p>
-            Aqui ficará o template principal
-        </p>
-    </div>
+    @if(isset($msg))
+        <div class="alert alert-success">
+            <p>
+                    Bem-Vindo {{$msg}}
+            </p>
+        </div>
+    @endif
 @endsection

@@ -15,7 +15,7 @@ class HasToken
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->session()->has('token'))
+        if(!$request->session()->has('dados'))
         {
             return redirect('/');
         }
