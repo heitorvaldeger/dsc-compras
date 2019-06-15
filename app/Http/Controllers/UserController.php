@@ -27,7 +27,7 @@ class UserController extends Controller
 
             return view('componentes.userprofile', ['dados' => $dados]);
         }
-        if($status_code == 400){
+        if($status_code != 200){
             return redirect('profile')->with('status_code', $status_code);
         }
     }
