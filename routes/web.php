@@ -24,4 +24,19 @@ Route::group(['middleware' => ['hastoken']], function(){
     })->name('index'); 
     Route::get('/logout', 'AutenticarController@LogoutAction')->name('logout');
     Route::get('/profile/{id}', 'UserController@ViewProfileAction')->name('profile');
+
+    Route::get('/unidades', 'UnidadeController@IndexUnidades')->name('indexU');
+    Route::post('/unidades/salvar', 'UnidadeController@CadastrarUnidade')
+        ->name('salvarU')
+        ->middleware('unidadecoru');
+
+    Route::get('/fornecedors', 'FornecedorController@Index')->name('indexF');
+    Route::post('/fornecedors/salvar', 'FornecedorController@Cadastrar')
+        ->name('salvarF')
+        ->middleware('fornecedorcoru');
+    
+    Route::get('/insumos', 'InsumoController@Index')->name('indexI');
+    Route::post('/insumos/salvar', 'InsumoController@Cadastrar')
+        ->name('salvarI')
+        ->middleware('insumocoru');
 });

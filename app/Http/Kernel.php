@@ -62,7 +62,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'hastoken' => \App\Http\Middleware\HasToken::class,
         'hasnottoken' => \App\Http\Middleware\HasNotToken::class,
-        'tokenvalidate' => \App\Http\Middleware\TokenValidate::class
+        'tokenvalidate' => \App\Http\Middleware\TokenValidate::class,
+        'unidadecoru' => \App\Http\Middleware\UnidadeCorU::class,
+        'fornecedorcoru' => \App\Http\Middleware\FornecedorCorU::class,
+        'insumocoru' => \App\Http\Middleware\InsumoCorU::class         
     ];
 
     /**

@@ -16,3 +16,31 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('unidades/salvar/{id?}', function(Request $request){
+   
+});
+
+Route::get('unidades/listar', function(Request $request){
+
+    $array = [
+        "id" => 1,
+        "descricao" => "Quilograma",
+        "grama" => 1000
+    ];
+    $array2 = [
+        "id" => 2,
+        "descricao" => "Quilograma",
+        "grama" => 1000
+    ];
+    $array3 = [
+        "id" => 3,
+        "descricao" => "Quilograma",
+        "grama" => 1000
+    ];
+    return response()->json([
+        $array,
+        $array2,
+        $array3
+    ]);
+});

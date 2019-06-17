@@ -10,7 +10,7 @@ class AutenticarController extends Controller
 {
     private $uri = 'http://acesso.com/api/';
     private $access;
-
+    
     public function AutenticarAction(Request $request)
     {
 
@@ -42,8 +42,7 @@ class AutenticarController extends Controller
             //Escrever o token na sessão
             $request->session()->put('dados', $dados);
             
-            $log = new LogController();
-            $log_result = $log->CriarLog($dados->token);
+            $log_result = LogController::CriarLog($dados->token, "Novo login realizado");
 
             if($log_result['status_code'] == 200 || $log_result['status_code'] == 400)
                 return redirect('index')->with('msg', $log_result['msg']);
@@ -52,12 +51,12 @@ class AutenticarController extends Controller
         if($status_code != 200)
         {
             return redirect('/')->with('authfailure', 'Usuário ou senha incorretos');
-            //return view('login.login', ['authfailure' => 'Usuário ou senha incorretos']);
         }
     }
 
     public function LogoutAction(Request $request)
     {
+        LogController::CriarLog($request->session()->get('dados')->token, "Novo logout realizado");
         $request->session()->forget('dados');
 
         return redirect('/');

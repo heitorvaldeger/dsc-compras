@@ -9,6 +9,15 @@
 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	 <!-- Custom styles for this template-->
 	 <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
+	 <!-- Bootstrap core JavaScript-->
+	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
+	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"></script>
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -34,7 +43,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">
+			<a class="nav-link" href="{{route('indexI')}}">
 				<i class="fas fa-plus"></i>
 				<span>Registrar Insumos</span></a>
 			</li>
@@ -48,14 +57,14 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">
+			<a class="nav-link" href="{{route('indexF')}}">
 				<i class="fas fa-industry"></i>
 				<span>Cadastrar Fornecedor</span></a>
 			</li>
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">
+			<a class="nav-link" href="{{route('indexU')}}">
 				<i class="fas fa-weight-hanging"></i>
 				<span>Registrar Unidades de Medida</span></a>
 			</li>
@@ -169,22 +178,6 @@
 				</footer>
 			</div>
 		</div>
-	</div>	
-	<!-- Bootstrap core JavaScript-->
-	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
-	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"></script>
-
-	<!-- Page level plugins -->
-	<script src="vendor/chart.js/Chart.min.js"></script>
-
-	<!-- Page level custom scripts -->
-	<script src="js/demo/chart-area-demo.js"></script>
-	<script src="js/demo/chart-pie-demo.js"></script>
+	</div>
 </body>
 </html>

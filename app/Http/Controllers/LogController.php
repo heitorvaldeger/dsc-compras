@@ -8,23 +8,20 @@ use GuzzleHttp\Client;
 
 class LogController extends Controller
 {
-    private $access;
-    private $uri = 'http://acesso.com/api/';
-
-    public function CriarLog($token)
+    public static function CriarLog($token, $acao)
     {
-        $this->access = new Client([
-            'base_uri' => $this->uri,
+        $access = new Client([
+            'base_uri' => 'http://acesso.com/api/',
             'timeout' => 2.0,
             'exceptions' => true,
         ]);
 
-        $response = $this->access->put('logs/criar', [
+        $response = $access->put('logs/criar', [
             'headers' => [
                 'token' => $token,
             ],
             'json' => [
-                'acao' => 'Novo login realizado',
+                'acao' => $acao,
             ],
         ]);
 
