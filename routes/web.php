@@ -25,18 +25,24 @@ Route::group(['middleware' => ['hastoken']], function(){
     Route::get('/logout', 'AutenticarController@LogoutAction')->name('logout');
     Route::get('/profile/{id}', 'UserController@ViewProfileAction')->name('profile');
 
+    //Rotas para UNIDADE
     Route::get('/unidades', 'UnidadeController@IndexUnidades')->name('indexU');
-    Route::post('/unidades/salvar', 'UnidadeController@CadastrarUnidade')
-        ->name('salvarU')
-        ->middleware('unidadecoru');
+    Route::view('/unidades/cadastrar', 'componentes.unidade.cadastrar')->name('cadastrarU');
+    Route::post('/unidades/cadastrar', 'UnidadeController@Cadastrar')->name('cadastrarU');
+    Route::post('/unidades/atualizar/{id}', 'UnidadeController@Atualizar')->name('atualizarU');
+    Route::get('/unidades/atualizar/{id}', 'UnidadeController@RenderUpdate')->name('atualizarU');
 
+    //Rotas para FORNECEDOR
     Route::get('/fornecedors', 'FornecedorController@Index')->name('indexF');
-    Route::post('/fornecedors/salvar', 'FornecedorController@Cadastrar')
-        ->name('salvarF')
-        ->middleware('fornecedorcoru');
-    
+    Route::view('/fornecedors/cadastrar', 'componentes.fornecedor.cadastrar')->name('cadastrarF');
+    Route::post('/fornecedors/cadastrar', 'FornecedorController@Cadastrar')->name('cadastrarF');
+    Route::get('/fornecedors/atualizar/{id}', 'FornecedorController@BuscarFornecedorsID')->name('atualizarF');
+    Route::post('/fornecedors/atualizar/{id}', 'FornecedorController@Atualizar')->name('atualizarF');
+
+    //Rotas para INSUMOS
     Route::get('/insumos', 'InsumoController@Index')->name('indexI');
-    Route::post('/insumos/salvar', 'InsumoController@Cadastrar')
-        ->name('salvarI')
-        ->middleware('insumocoru');
+    Route::get('/insumos/cadastrar', 'InsumoController@BuscarFornecedorsUnidades')->name('cadastrarI');
+    Route::post('/insumos/cadastrar', 'InsumoController@Cadastrar')->name('cadastrarI');
+    Route::get('/insumos/atualizar/{id}', 'InsumoController@BuscarInsumoID')->name('atualizarI');
+    Route::post('/insumos/atualizar/{id}', 'InsumoController@Atualizar')->name('atualizarI');
 });

@@ -39,22 +39,27 @@ class FornecedorController extends Controller
         {
             LogController::CriarLog($request->session()->get('dados')->token, "Registrou um novo fornecedor");
 
-            return ['status_code'=>$response->getStatusCode(), 'fornecedors'=>$this->fornecedors];
+            return redirect()->route('indexF')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Cadastro realizado com sucesso']);
         }
         else
         {
-            return ['status_code'=>$response->getStatusCode()];
+            return redirect()->route('indexF')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Não foi possível realizar o cadastro']);
         }
     }
 
-    public function Atualizar(Request $request){
+    public function Atualizar(Request $request, $id){
+        
         $this->client = new Client([
             'base_uri' => $this->uri,
             'timeout' => 2.0,
             'exceptions' => false
         ]);
 
-        $response = $this->client->post('fornecedors/salvar/'.$request->id, [
+        $response = $this->client->post('fornecedors/salvar/'.$id, [
             'json' => [
                 'cnpj' => $request->cnpj,
                 'fantasia' => $request->fantasia,
@@ -65,11 +70,15 @@ class FornecedorController extends Controller
         if($response->getStatusCode() == 200)
         {
             LogController::CriarLog($request->session()->get('dados')->token, "Atualizou um fornecedor");
-            return ['status_code'=>$response->getStatusCode(), 'fornecedors'=>$this->fornecedors];
+            return redirect()->route('indexF')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Registro atualizado com sucesso']);
         }
         else
         {
-            return ['status_code'=>$response->getStatusCode()];
+            return redirect()->route('indexF')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Não foi possível atualizar o registro']);
         }
     }
 
@@ -92,6 +101,27 @@ class FornecedorController extends Controller
         else
         {
             return $status_code;
+        }
+    }
+
+    public function BuscarFornecedorsID($id){
+        $this->access = new Client([
+            'base_uri' => $this->uri,
+            'timeout' => 2.0,
+            'exceptions' => false
+        ]);
+
+        $response = $this->access->get('fornecedors/consultar/'.$id);
+
+        if($response->getStatusCode() == 200)
+        {
+            $fornecedor = json_decode($response->getBody());
+            return view('componentes.fornecedor.atualizar', ['fornecedor' => $fornecedor]);
+        }
+        else
+        {
+            $fornecedor = json_decode($response->getBody());
+            return view('componentes.fornecedor.atualizar', ['fornecedor' => $fornecedor]);
         }
     }
 }

@@ -10,79 +10,14 @@ class InsumoController extends Controller
     private $uri = "http://armazem.com/api/";
     private $client;
     private $insumos;
-    private $fornecedors;
-    private $unidades;
-
+    
     public function Index(){
-        $status_code = $this->BuscarInsumos();
-        if(($this->BuscarInsumos() == 200) and 
-        ($this->BuscarFornecedores() == 200) and 
-        ($this->BuscarUnidades() == 200))
-            return view('componentes.insumos.index', [
-                'insumos' => $this->insumos, 
-                'fornecedors' => $this->fornecedors,
-                'unidades' => $this->unidades
-            ]);
+        $this->insumos = self::BuscarInsumos();
+
+        if($this->insumos != null)
+            return view('componentes.insumos.index', ['insumos' => $this->insumos]);
         else
             return view('componentes.insumos.index');
-    }
-
-    private function BuscarInsumos(){
-        $this->client = new Client([
-            'base_uri' => $this->uri,
-            'timeout' => 2.0,
-            'exceptions' => false
-        ]);
-
-        $response = $this->client->get('insumos/listar');
-
-        if($response->getStatusCode() == 200)
-        {
-            $this->insumos = json_decode($response->getBody());
-            return 200;
-        }
-        else
-        {
-            return $response->getStatusCode();
-        }
-    }
-    private function BuscarFornecedores(){
-        $this->client = new CLient([
-            'base_uri' => $this->uri,
-            'timeout' => 2.0,
-            'exceptions' => false
-        ]);
-
-        $response = $this->client->get('fornecedors/listar');
-
-        if($response->getStatusCode() == 200)
-        {
-            $this->fornecedors = json_decode($response->getBody());
-            return 200;
-        }
-        else
-        {
-            return $response->getStatusCode();
-        }
-    }
-    private function BuscarUnidades(){
-        $this->client = new CLient([
-            'base_uri' => $this->uri,
-            'timeout' => 2.0,
-            'exceptions' => false
-        ]);
-
-        $response = $this->client->get('unidades/listar');
-
-        if($response->getStatusCode() == 200)
-        {
-            $this->unidades = json_decode($response->getBody());
-            return 200;
-        }
-        else
-        {
-            return $response->getStatusCode();
-        }
     }
 
     public function Cadastrar(Request $request){
@@ -105,21 +40,25 @@ class InsumoController extends Controller
         if($response->getStatusCode() == 200)
         {
             LogController::CriarLog($request->session()->get('dados')->token, "Registrou um novo insumo");
-            return ['status_code' => $response->getStatusCode(), 'insumos' => $this->insumos];
+            return redirect()->route('indexI')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Cadastro realizado com sucesso']);
         }
         else
         {
-            return ['status_code' => $response->getStatusCode()];
+            return redirect()->route('indexI')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Não foi possível realizar o cadastro']);
         }
     }
-    public function Atualizar(Request $request){
+    public function Atualizar(Request $request, $id){
         $this->client = new Client([
             'base_uri' => $this->uri,
             'timeout' => 2.0,
             'exceptions' => false
         ]);
 
-        $response = $this->client->post('insumos/salvar/'.$request->get('idinsumo'), [
+        $response = $this->client->post('insumos/salvar/'.$id, [
             'json' => [
                 'descricao' => $request->descricao,
                 'materia_prima' => $request->materia_prima,
@@ -132,11 +71,77 @@ class InsumoController extends Controller
         if($response->getStatusCode() == 200)
         {
             LogController::CriarLog($request->session()->get('dados')->token, "Atualizou um insumo");
-            return ['status_code' => $response->getStatusCode(), 'insumos' => $this->insumos];
+            return redirect()->route('indexI')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Atualização realizada com sucesso']);
         }
         else
         {
-            return ['status_code' => $response->getStatusCode()];
+            return redirect()->route('indexI')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Não foi possível fazer atualização']);
         }
+    }
+
+    public function BuscarFornecedorsUnidades(){
+        $fornecedors = self::BuscarFornecedores();
+        $unidades = self::BuscarUnidades();
+
+        return view('componentes.insumos.cadastrar', ['fornecedors' => $fornecedors, 'unidades' => $unidades]);
+    }
+
+    public function BuscarInsumoID($id)
+    {
+        $this->client = new Client([
+            'base_uri' => $this->uri,
+            'timeout' => 2.0,
+            'exceptions' => false
+        ]);
+
+        $response = $this->client->get('insumos/consultar/'.$id);
+        
+        return view('componentes.insumos.atualizar', [
+            'insumo' => json_decode($response->getBody()),
+            'fornecedors' => self::BuscarFornecedores(),
+            'unidades' => self::BuscarUnidades()
+            ]);
+    }
+
+    private static function BuscarInsumos(){
+        $client = new Client([
+            'base_uri' => "http://armazem.com/api/",
+            'timeout' => 2.0,
+            'exceptions' => false
+        ]);
+
+        $response = $client->get('insumos/listar');
+
+        return $insumos = json_decode($response->getBody());
+    }
+
+    private static function BuscarFornecedores(){
+        $client = new Client([
+            'base_uri' => "http://armazem.com/api/",
+            'timeout' => 2.0,
+            'exceptions' => false
+        ]);
+
+        $response = $client->get('fornecedors/listar');
+
+        $fornecedors = json_decode($response->getBody());
+        return $fornecedors;
+    }
+
+    private static function BuscarUnidades(){
+        $client = new Client([
+            'base_uri' => "http://armazem.com/api/",
+            'timeout' => 2.0,
+            'exceptions' => false
+        ]);
+
+        $response = $client->get('unidades/listar');
+
+        $unidades = json_decode($response->getBody());
+        return $unidades;
     }
 }

@@ -29,11 +29,16 @@ class UnidadeController extends Controller
         if($response->getStatusCode() == 200)
         {
             LogController::CriarLog($request->session()->get('dados')->token, "Cadastrou uma nova unidade");
-            return ['status_code'=>$response->getStatusCode(), 'unidades'=>$this->unidades];
+
+            return redirect()->route('indexU')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Cadastro realizado com sucesso']);
         }
         else
         {
-            return ['status_code'=>$response->getStatusCode()];
+            return redirect()->route('indexU')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Não foi possível realizar o cadastro']);
         }
     }
 
@@ -70,7 +75,7 @@ class UnidadeController extends Controller
         }
     }
 
-    public function Atualizar(Request $request)
+    public function Atualizar(Request $request, $id)
     {
         $this->access = new Client([
             'base_uri' => $this->uri,
@@ -78,7 +83,7 @@ class UnidadeController extends Controller
             'exceptions' => false
         ]);
 
-        $response = $this->access->post('unidades/salvar/'.$request->idunidade, [
+        $response = $this->access->post('unidades/salvar/'.$id, [
             'json' => [
                 'descricao' => $request->unidadesname,
                 'grama' => $request->grama,
@@ -88,11 +93,20 @@ class UnidadeController extends Controller
         if($response->getStatusCode() == 200)
         {
             LogController::CriarLog($request->session()->get('dados')->token, "Atualizou uma unidade");
-            return ['status_code'=>$response->getStatusCode(), 'unidades'=>$this->unidades];
+            return redirect()->route('indexU')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Atualização realizada com sucesso']);
         }
         else
         {
-            return ['status_code'=>$response->getStatusCode()];
+            return redirect()->route('indexU')->with([
+                'status_code' => $response->getStatusCode(), 
+                'msg' => 'Não foi possível realizar a atualização']);
         }
+    }
+
+    public function RenderUpdate($id)
+    {
+        return view('componentes.unidade.atualizar', ['id' => $id]);
     }
 }
