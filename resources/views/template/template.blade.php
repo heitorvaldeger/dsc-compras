@@ -36,9 +36,9 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">
+			<a class="nav-link" href="{{route('indexU')}}">
 				<i class="fas fa-plus"></i>
-				<span>Cadastrar Compra</span></a>
+				<span>Registrar Unidades de Medida</span></a>
 			</li>
 
 			<!-- Nav Item - Dashboard -->
@@ -50,24 +50,25 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
+			<a class="nav-link" href="{{route('indexF')}}">
+				<i class="fas fa-plus"></i>
+				<span>Registrar Fornecedor</span></a>
+			</li>
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item active">
+			<a class="nav-link" href="index.html">
+				<i class="fas fa-shopping-basket"></i>
+				<span>Realizar Compra</span></a>
+			</li>
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item active">
 			<a class="nav-link" href="index.html">
 				<i class="fas fa-calendar-alt"></i>
 				<span>Gerar Relatório</span></a>
 			</li>
 
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active">
-			<a class="nav-link" href="{{route('indexF')}}">
-				<i class="fas fa-industry"></i>
-				<span>Cadastrar Fornecedor</span></a>
-			</li>
-
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active">
-			<a class="nav-link" href="{{route('indexU')}}">
-				<i class="fas fa-weight-hanging"></i>
-				<span>Registrar Unidades de Medida</span></a>
-			</li>
 			<!-- Divider -->
 			<hr class="sidebar-divider">
 
