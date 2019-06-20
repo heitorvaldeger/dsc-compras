@@ -45,4 +45,9 @@ Route::group(['middleware' => ['hastoken']], function(){
     Route::post('/insumos/cadastrar', 'InsumoController@Cadastrar')->name('cadastrarI');
     Route::get('/insumos/atualizar/{id}', 'InsumoController@BuscarInsumoID')->name('atualizarI');
     Route::post('/insumos/atualizar/{id}', 'InsumoController@Atualizar')->name('atualizarI');
+
+    //Rotas para COMPRAS
+    Route::get('/compras', 'ComprasController@Index')->name('indexC');
+    Route::get('/compras/realizar/{id}', 'ComprasController@BuscarInsumo')->name('cadastrarC');
+    Route::post('/compras/realizar/', 'ComprasController@RealizarCompra')->name('realizarC');
 });

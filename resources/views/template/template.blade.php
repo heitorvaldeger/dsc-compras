@@ -57,7 +57,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">
+			<a class="nav-link" href="{{route('indexC')}}">
 				<i class="fas fa-shopping-basket"></i>
 				<span>Realizar Compra</span></a>
 			</li>
