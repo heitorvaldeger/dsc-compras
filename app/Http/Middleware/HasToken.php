@@ -19,6 +19,11 @@ class HasToken
         {
             return redirect('/');
         }
-        return $next($request);
+
+        $dados = $request->session()->get('dados');
+
+        if($dados->usuario->tipo_acesso[0] == "1")
+            return $next($request);
+        return redirect('/');
     }
 }
