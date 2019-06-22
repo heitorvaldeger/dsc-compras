@@ -50,4 +50,6 @@ Route::group(['middleware' => ['hastoken']], function(){
     Route::get('/compras', 'ComprasController@Index')->name('indexC');
     Route::get('/compras/realizar/{id}', 'ComprasController@BuscarInsumo')->name('cadastrarC');
     Route::post('/compras/realizar/', 'ComprasController@RealizarCompra')->name('realizarC');
+    Route::post('/compras/balanco', 'ComprasController@Balanco')->name('balancoC');
+    Route::get('/compras/balanco', 'ComprasController@IndexBalanco')->name('balancoIndex');
 });

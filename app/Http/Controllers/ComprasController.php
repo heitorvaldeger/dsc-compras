@@ -81,4 +81,29 @@ class ComprasController extends Controller
                 'msg' => 'Não foi possível realizar a compra com sucesso']);   
         }
     }
+
+    public function Balanco(Request $request)
+    {
+        $data_inicio = str_replace('/', '-', $request->data_inicio);
+        $data_fim = str_replace('/', '-', $request->data_fim);
+
+        $this->client = new Client([
+            'base_uri' => $this->uri,
+            'timeout' => 2.0,
+            'exceptions' => false,
+        ]);
+
+        $response = $this->client->get('compras/balanco/'.$data_inicio.'/'.$data_fim);
+ 
+        return redirect()->route('balancoIndex')->with([
+            'status_code' => $response->getStatusCode(), 
+            'msg' => 'Não foi possível realizar a compra com sucesso',
+            'balanco' => json_decode($response->getBody())
+        ]);
+    }
+
+    public function IndexBalanco()
+    {
+        return view('componentes.compras.balanco');
+    }
 }

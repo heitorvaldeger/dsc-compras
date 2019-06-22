@@ -64,7 +64,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">
+			<a class="nav-link" href="{{route('balancoIndex')}}">
 				<i class="fas fa-calendar-alt"></i>
 				<span>Gerar Relatório</span></a>
 			</li>
