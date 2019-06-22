@@ -28,12 +28,11 @@ class TokenValidate
                 return redirect('/index');
             }
             
-            if($retorno == false)
-            {
-                return redirect('/');
-            }
-
             return redirect('/');
+            // if($retorno == false)
+            // {
+            //     return redirect('/');
+            // }
         }
 
         return $next($request);

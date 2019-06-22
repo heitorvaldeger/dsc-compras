@@ -44,8 +44,8 @@ class AutenticarController extends Controller
             
             $log_result = LogController::CriarLog($dados->token, "Novo login realizado");
 
-            if($log_result['status_code'] == 200 || $log_result['status_code'] == 400)
-                return redirect('index')->with('msg', $log_result['msg']);
+            // if($log_result['status_code'] == 200 || $log_result['status_code'] == 400)
+            return redirect('index')->with('msg', $log_result['msg']);
         }
 
         if($status_code != 200)

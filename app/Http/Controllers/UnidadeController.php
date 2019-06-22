@@ -44,10 +44,10 @@ class UnidadeController extends Controller
 
     public function IndexUnidades()
     {
-        $status_code = $this->BuscarUnidades();
+        $unidades = $this->BuscarUnidades();
 
-        if($status_code == 200)
-            return view('componentes.unidade.indexunidade', ['unidades' => $this->unidades]);
+        if($unidades != null)
+            return view('componentes.unidade.indexunidade', ['unidades' => $unidades]);
         else
             return view('componentes.unidade.indexunidade');
     }
@@ -64,15 +64,7 @@ class UnidadeController extends Controller
 
         $status_code = $response->getStatusCode();
 
-        if($status_code == 200)
-        {
-            $this->unidades = json_decode($response->getBody());
-            return $status_code;
-        }
-        else
-        {
-            return $status_code;
-        }
+        return json_decode($response->getBody());
     }
 
     public function Atualizar(Request $request, $id)
