@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
-
 class AutenticarController extends Controller
 {
-    private $uri = 'http://acesso.com/api/';
+    private $uri;
     private $access;
     
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseAcesso();
+    }
+
     public function AutenticarAction(Request $request)
     {
-
         $login = $request->login;
         $password = $request->password;
 

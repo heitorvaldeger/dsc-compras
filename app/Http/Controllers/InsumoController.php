@@ -7,10 +7,15 @@ use GuzzleHttp\Client;
 
 class InsumoController extends Controller
 {
-    private $uri = "http://armazem.com/api/";
+    private $uri;
     private $client;
     private $insumos;
-    
+
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseArmazem();
+    }
+
     public function Index(){
         $this->insumos = self::BuscarInsumos();
 
@@ -109,7 +114,7 @@ class InsumoController extends Controller
 
     private static function BuscarInsumos(){
         $client = new Client([
-            'base_uri' => "http://armazem.com/api/",
+            'base_uri' => RouteBaseUriController::UriBaseArmazem(),
             'timeout' => 2.0,
             'exceptions' => false
         ]);
@@ -121,7 +126,7 @@ class InsumoController extends Controller
 
     private static function BuscarFornecedores(){
         $client = new Client([
-            'base_uri' => "http://armazem.com/api/",
+            'base_uri' => RouteBaseUriController::UriBaseArmazem(),
             'timeout' => 2.0,
             'exceptions' => false
         ]);
@@ -134,7 +139,7 @@ class InsumoController extends Controller
 
     private static function BuscarUnidades(){
         $client = new Client([
-            'base_uri' => "http://armazem.com/api/",
+            'base_uri' => RouteBaseUriController::UriBaseArmazem(),
             'timeout' => 2.0,
             'exceptions' => false
         ]);

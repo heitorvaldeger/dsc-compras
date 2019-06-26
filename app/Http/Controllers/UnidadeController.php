@@ -7,16 +7,21 @@ use GuzzleHttp\Client;
 
 class UnidadeController extends Controller
 {
-    private $uri = "http://armazem.com/api/";
+    private $uri;
     private $access;
     private $unidades;
+
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseArmazem();
+    }
 
     public function Cadastrar(Request $request)
     {
         $this->access = new Client([
             'base_uri' => $this->uri,
             'timeout' => 2.0,
-            'exceptions' => false
+            'exceptions' => true
         ]);
 
         $response = $this->access->post('unidades/salvar', [

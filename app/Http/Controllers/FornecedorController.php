@@ -7,10 +7,15 @@ use GuzzleHttp\Client;
 
 class FornecedorController extends Controller
 {
-    private $uri = "http://armazem.com/api/";
+    private $uri;
     private $client;
     private $fornecedors;
 
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseArmazem();
+    }
+    
     public function Index(){
         $status_code = $this->BuscarFornecedors();
 

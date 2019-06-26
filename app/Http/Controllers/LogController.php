@@ -8,10 +8,17 @@ use GuzzleHttp\Client;
 
 class LogController extends Controller
 {
+    private $uri;
+
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseAcesso();
+    }
+
     public static function CriarLog($token, $acao)
     {
         $access = new Client([
-            'base_uri' => 'http://acesso.com/api/',
+            'base_uri' => RouteBaseUriController::UriBaseAcesso(),
             'timeout' => 2.0,
             'exceptions' => true,
         ]);

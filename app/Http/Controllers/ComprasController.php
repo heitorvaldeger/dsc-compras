@@ -8,8 +8,13 @@ use GuzzleHttp\Client;
 class ComprasController extends Controller
 {
     private $client;
-    private $uri = "http://armazem.com/api/";
+    private $uri;
 
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseArmazem();
+    }
+    
     public function Index(Request $request)
     {
         $this->client = new Client([

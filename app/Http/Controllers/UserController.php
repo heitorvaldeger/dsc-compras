@@ -7,9 +7,14 @@ use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
-    private $uri = "http://acesso.com/api/";
+    private $uri;
     private $access;
 
+    public function __construct()
+    {   
+        $this->uri = RouteBaseUriController::UriBaseAcesso();
+    }
+    
     public function ViewProfileAction(Request $request)
     {
         $this->access = new Client([
