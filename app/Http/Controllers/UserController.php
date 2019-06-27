@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $this->access = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
         

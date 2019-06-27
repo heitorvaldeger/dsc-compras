@@ -20,7 +20,7 @@ class UnidadeController extends Controller
     {
         $this->access = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => true
         ]);
 
@@ -61,7 +61,7 @@ class UnidadeController extends Controller
     {
         $this->access = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -76,7 +76,7 @@ class UnidadeController extends Controller
     {
         $this->access = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 

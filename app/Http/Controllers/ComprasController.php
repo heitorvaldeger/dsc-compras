@@ -19,7 +19,7 @@ class ComprasController extends Controller
     {
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -34,7 +34,7 @@ class ComprasController extends Controller
     {
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -53,7 +53,7 @@ class ComprasController extends Controller
 
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false,
         ]);
 
@@ -94,7 +94,7 @@ class ComprasController extends Controller
 
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false,
         ]);
 

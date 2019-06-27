@@ -28,7 +28,7 @@ class FornecedorController extends Controller
     public function Cadastrar(Request $request){
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -60,7 +60,7 @@ class FornecedorController extends Controller
         
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -90,7 +90,7 @@ class FornecedorController extends Controller
     private function BuscarFornecedors(){
         $this->access = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -112,7 +112,7 @@ class FornecedorController extends Controller
     public function BuscarFornecedorsID($id){
         $this->access = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 

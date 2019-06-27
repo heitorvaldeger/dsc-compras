@@ -28,7 +28,7 @@ class InsumoController extends Controller
     public function Cadastrar(Request $request){
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -59,7 +59,7 @@ class InsumoController extends Controller
     public function Atualizar(Request $request, $id){
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -99,7 +99,7 @@ class InsumoController extends Controller
     {
         $this->client = new Client([
             'base_uri' => $this->uri,
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -115,7 +115,7 @@ class InsumoController extends Controller
     private static function BuscarInsumos(){
         $client = new Client([
             'base_uri' => RouteBaseUriController::UriBaseArmazem(),
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -127,7 +127,7 @@ class InsumoController extends Controller
     private static function BuscarFornecedores(){
         $client = new Client([
             'base_uri' => RouteBaseUriController::UriBaseArmazem(),
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 
@@ -140,7 +140,7 @@ class InsumoController extends Controller
     private static function BuscarUnidades(){
         $client = new Client([
             'base_uri' => RouteBaseUriController::UriBaseArmazem(),
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => false
         ]);
 

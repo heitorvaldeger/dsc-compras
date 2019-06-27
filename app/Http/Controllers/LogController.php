@@ -19,7 +19,7 @@ class LogController extends Controller
     {
         $access = new Client([
             'base_uri' => RouteBaseUriController::UriBaseAcesso(),
-            'timeout' => 2.0,
+            'timeout' => RouteBaseUriController::Timeout(),
             'exceptions' => true,
         ]);
 

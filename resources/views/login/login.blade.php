@@ -56,7 +56,7 @@
                     </a>
                 </div>
                 <div class="text-center w-full">
-                    <a class="txt1" href="http://acesso.com/usuarios/cadastro">
+                    <a class="txt1" href="http://192.168.100.173:80/usuarios/cadastro">
                         Criar nova conta
                         <i class="fa fa-long-arrow-right"></i>
                     </a>
