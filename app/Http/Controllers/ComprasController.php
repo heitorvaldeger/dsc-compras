@@ -48,25 +48,27 @@ class ComprasController extends Controller
 
     public function RealizarCompra(Request $request)
     {
-        $data_compra = str_replace('/', '-', $request->data_compra);
-        $data_entrada = str_replace('/', '-', $request->data_entrada);
+        $data_compra = date("d/m/Y", strtotime($request->data_compra));
+        $data_entrada = date("d/m/Y", strtotime($request->data_entrada));
+        //$data_compra = str_replace('-', '/', $request->data_compra);
+        //$data_entrada = str_replace('-', '/', $request->data_entrada);
 
         $this->client = new Client([
             'base_uri' => $this->uri,
             'timeout' => RouteBaseUriController::Timeout(),
-            'exceptions' => false,
+            'exceptions' => true,
         ]);
 
         $response = $this->client->put('compras/realizar', 
         [
         'json' => [
-            'insumo_id' => (int)$request->insumo_id,
-            'quantidade' => (float)$request->quantidade,
-            'valor_unitario' => (float)$request->valor_unitario,
-            'icms' => (float)$request->icms,
-            'frete' => (float)$request->frete,
-            'ipi' => (float)$request->ipi,
-            'nf' => (float)$request->nf,
+            'insumo_id' => $request->insumo_id,
+            'quantidade' => $request->quantidade,
+            'valor_unitario' => $request->valor_unitario,
+            'icms' => $request->icms,
+            'frete' => $request->frete,
+            'ipi' => $request->ipi,
+            'nf' => $request->nf,
             'data_compra' => $data_compra,
             'data_entrada' => $data_entrada
             ]
@@ -89,8 +91,11 @@ class ComprasController extends Controller
 
     public function Balanco(Request $request)
     {
-        $data_inicio = str_replace('/', '-', $request->data_inicio);
-        $data_fim = str_replace('/', '-', $request->data_fim);
+        $data_inicio = date("d-m-Y", strtotime($request->data_inicio));
+        $data_fim = date("d-m-Y", strtotime($request->data_fim));
+
+        // $data_inicio = str_replace('/', '-', $request->data_inicio);
+        // $data_fim = str_replace('/', '-', $request->data_fim);
 
         $this->client = new Client([
             'base_uri' => $this->uri,

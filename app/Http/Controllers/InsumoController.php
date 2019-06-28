@@ -29,15 +29,16 @@ class InsumoController extends Controller
         $this->client = new Client([
             'base_uri' => $this->uri,
             'timeout' => RouteBaseUriController::Timeout(),
-            'exceptions' => false
+            'exceptions' => true
         ]);
+        
+        $materiaprima = $request->get('idmateriaprima');
 
         $response = $this->client->post('insumos/salvar', [
             'json' => [
                 'descricao' => $request->descricao,
-                'materia_prima' => $request->materia_prima,
-                'estoque' => $request->estoque,
-                'fornecedors_id' => $request->get('idfornecedor'),
+                'materia_prima' => $materiaprima,
+                'fornecedor_id' => $request->get('idfornecedor'),
                 'unidade_id' => $request->get('idunidade')
             ]
         ]);
@@ -63,12 +64,14 @@ class InsumoController extends Controller
             'exceptions' => false
         ]);
 
+        $materiaprima = $request->get('idmateriaprima');
+
         $response = $this->client->post('insumos/salvar/'.$id, [
             'json' => [
                 'descricao' => $request->descricao,
-                'materia_prima' => $request->materia_prima,
+                'materia_prima' => $materiaprima,
                 'estoque' => $request->estoque,
-                'fornecedors_id' => $request->get('idfornecedor'),
+                'fornecedor_id' => $request->get('idfornecedor'),
                 'unidade_id' => $request->get('idunidade')
             ],
         ]);

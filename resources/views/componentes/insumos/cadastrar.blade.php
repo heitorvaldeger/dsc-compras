@@ -9,7 +9,10 @@
         </div>
         <div class="form-group">
             <label for="materia_prima">Matéria Prima</label>
-            <input type="text" class="form-control" id="materia_prima" name="materia_prima">
+            <select name="idmateriaprima">
+                    <option value="1" selected="value">Sim</option>
+                    <option value="0">Não</option>
+                </select>
         </div>
         <div class="form-group">
             <label for="estoque">Estoque</label>
